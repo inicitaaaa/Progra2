@@ -1,0 +1,89 @@
+package service;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+
+public class Menu {
+
+	public static void main(String[] args) {
+		
+		int opcion = 0;
+		
+		do {
+			try {
+				opcion = Integer.parseInt(JOptionPane.showInputDialog("------------------- MENU ----------------------\n Digite una opción:\n 1. Primer ejercicio \n 2. Segundo ejercicio \n 3. Tercer ejercicio\n 4. Salir \n --------------------------------------------------"));
+				switch (opcion) {
+				case 1:
+						
+				int numeroA = 0; 
+				int numeroB = 0;
+				int resultado1= 0;
+				int resultado2= 0;
+				
+				numeroA = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el primer número:"));
+				numeroB = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el segundo número:"));	
+					
+					for (int i = 1; i < numeroA; i++ ) {
+						if( numeroA % i == 0) {
+							resultado1 = resultado1 + i;
+						}
+					} 
+					
+					for (int i = 1; i < numeroB; i++ ) {
+						if( numeroA % i == 0) {
+							resultado2 = resultado2 + i;
+						}
+					} 
+					
+					if (resultado1 == numeroB && resultado2 == numeroA) {
+						JOptionPane.showMessageDialog(null, " el numero " + numeroA + " y el numero " + numeroB + " son numeros amigos ");
+					} else {
+						JOptionPane.showMessageDialog(null, " el numero " + numeroA + " y el numero " + numeroB + " no son numeros amigos ");
+					}
+							
+					break;
+				case 2:
+					
+					String dia;
+					String mes;
+					String ano;
+					
+					try {
+					dia = JOptionPane.showInputDialog("Ingrese el día: ");
+					mes = JOptionPane.showInputDialog("Ingrese el mes: ");
+					ano = JOptionPane.showInputDialog("Ingrese el año: ");
+					
+					String fecha = dia + "/" + mes + "/"+ ano;
+					
+					SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
+					
+					LocalDate hoy = LocalDate.now();
+					Date hoy1 = Date.from(hoy.atStartOfDay(ZoneId.systemDefault()).toInstant());
+					
+					Date fecha1 = sdf.parse(fecha);
+					
+					if (fecha1.before(hoy1)) {
+						JOptionPane.showMessageDialog(null, "el año ingresado es menor");
+					}  
+					
+				
+					} catch(ParseException e) {
+						JOptionPane.showMessageDialog(null, "al batir la fecha da eeeerror", "Error Fatal!!!!!",
+								JOptionPane.ERROR_MESSAGE);
+					}
+					
+					break;
+				case 3: 
+					break;
+					
+				} } catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(null, "Elige una opción valida", "Error Fatal!!!!!",
+							JOptionPane.ERROR_MESSAGE);
+				}		
+	  	} while (opcion != 4);
+	  } 
+	}
